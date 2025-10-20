@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: oedp-md2-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: oedp_md2
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - oedp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d oedp_md2"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: oedp-md2-backend
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://oedp_user:oedp_secure_password_2025@postgres:5432/oedp_md2
+      JWT_SECRET: oedp-jwt-secret-key-change-in-production-12345
+      JWT_EXPIRES_IN: 7d
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+      SMTP_USER: noreply@oedp.de
+      SMTP_PASS: ""
+      FRONTEND_URL: http://localhost:5173
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - oedp-network
+    command: npm run dev
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: oedp-md2-frontend
+    environment:
+      VITE_API_URL: http://localhost:3000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - oedp-network
+    command: npm run dev
+
+  # MailHog (Development Email Testing)
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: oedp-md2-mailhog
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - oedp-network
+
+  # Adminer (Database Management)
+  adminer:
+    image: adminer:latest
+    container_name: oedp-md2-adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - oedp-network
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  oedp-network:
+    driver: bridge
