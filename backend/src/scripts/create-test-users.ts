@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { AppDataSource } from '../config/database';
-import { User } from '../entities/User.entity';
+import { User, UserRole, MembershipStatus } from '../entities/User.entity';
 import bcrypt from 'bcrypt';
 
 async function createTestUsers() {
@@ -239,9 +239,14 @@ async function createTestUsers() {
 
       // Create user
       const user = userRepository.create({
-        ...userData,
+        email: userData.email,
         password: hashedPassword,
-        membershipStatus: 'active',
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        memberId: userData.memberId,
+        role: userData.role as UserRole,
+        landesverband: userData.landesverband,
+        membershipStatus: MembershipStatus.ACTIVE,
         emailVerified: true,
         isActive: true,
       });

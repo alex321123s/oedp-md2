@@ -1,0 +1,109 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RAILWAY ENVIRONMENT VARIABLES - COPY & PASTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Add these to Railway Dashboard → Variables tab:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NODE_ENV=production
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PORT=3001
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATABASE_URL=postgresql://postgres:tonreg321@db.bmnfylmrhdmhdugerxla.supabase.co:5432/postgres
+
+⚠️  REPLACE [YOUR-SUPABASE-PASSWORD] with your actual password!
+Get it from: https://supabase.com/dashboard/project/bmnfylmrhdmhdugerxla/settings/database
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+JWT_SECRET=b31f4098962ae2da86463be5f593238f07247e3775c5fef061ce89a7cd28755a
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+JWT_EXPIRES_IN=7d
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COOKIE_SECRET=211d815860edba5db83a285dc16fed87c2b15d1961facea29a547933a939677e
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FRONTEND_URL=https://bash-pj2y2dymh-alexanderjosephbell-gmailcoms-projects.vercel.app/
+
+⚠️  UPDATE this with your actual Vercel URL if different!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MAX_FILE_SIZE=5242880
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RATE_LIMIT_WINDOW_MS=900000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RATE_LIMIT_MAX_REQUESTS=100
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LOG_LEVEL=info
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BCRYPT_ROUNDS=12
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ENABLE_CORS=true
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPTIONAL: Email Configuration (can add later)
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+SMTP_FROM=noreply@yourdomain.com
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUICK LINKS:
+
+1. Get Supabase Password:
+   https://supabase.com/dashboard/project/bmnfylmrhdmhdugerxla/settings/database
+
+2. Railway Dashboard:
+   https://railway.app
+
+3. Your Vercel Project:
+   https://vercel.com/dashboard
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DEPLOYMENT STEPS:
+
+1. Go to https://railway.app
+2. Login with GitHub
+3. Click "New Project" → "Deploy from GitHub repo"
+4. Select your repository
+5. Click "Variables" tab
+6. Copy-paste each variable above (one at a time)
+7. Click "Deploy"
+8. Wait 2-5 minutes
+9. Get your Railway URL from Settings → Domains → Generate Domain
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  IMPORTANT:
+- Don't commit this file to Git!
+- Keep these secrets secure!
+- JWT_SECRET and COOKIE_SECRET are already generated for you
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

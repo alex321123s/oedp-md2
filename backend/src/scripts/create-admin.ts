@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { AppDataSource } from '../config/database';
-import { User } from '../entities/User.entity';
+import { User, UserRole, MembershipStatus } from '../entities/User.entity';
 import bcrypt from 'bcrypt';
 
 async function createAdmin() {
@@ -34,8 +34,8 @@ async function createAdmin() {
       firstName: 'Admin',
       lastName: 'User',
       memberId: 'ADMIN-001',
-      role: 'admin',
-      membershipStatus: 'active',
+      role: UserRole.ADMIN,
+      membershipStatus: MembershipStatus.ACTIVE,
       landesverband: 'Bundesverband',
       emailVerified: true,
       isActive: true,

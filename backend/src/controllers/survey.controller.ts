@@ -59,7 +59,7 @@ export class SurveyController {
       options: options,
       status: SurveyStatus.PENDING_APPROVAL,
       creatorId: req.user.id,
-      coInitiatorIds: validatedData.coInitiatorIds.join(','),
+      coInitiatorIds: validatedData.coInitiatorIds,
       durationDays: validatedData.durationDays,
       isAnonymous: validatedData.isAnonymous,
       isBinding: validatedData.isBinding,
