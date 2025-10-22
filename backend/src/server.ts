@@ -40,7 +40,11 @@ app.use(helmet({
 app.use(cors({
   origin: (origin, callback) => {
     // Allow localhost and local network IPs
-    const frontendUrl = process.env.FRONTEND_URL?.replace(/\/?$/, '');
+    const frontendUrls = (process.env.FRONTEND_URL || '')
+      .split(',')
+      .map(url => url.trim())
+      .filter(url => url.length > 0)
+      .map(url => url.replace(/\/?$/, ''));
     const allowedOrigins: (string | RegExp)[] = [
       'http://localhost:5173',
       'http://127.0.0.1:5173',
@@ -48,13 +52,19 @@ app.use(cors({
       /^http:\/\/172\.\d{1,3}\.\d{1,3}\.\d{1,3}:5173$/,
     ];
 
-    if (frontendUrl) {
-      allowedOrigins.push(frontendUrl);
-
-      if (frontendUrl.startsWith('http://')) {
-        allowedOrigins.push(frontendUrl.replace('http://', 'https://'));
+    frontendUrls.forEach(url => {
+      if (!allowedOrigins.includes(url)) {
+        allowedOrigins.push(url);
       }
-    }
+
+      if (url.startsWith('http://')) {
+        const httpsUrl = url.replace('http://', 'https://');
+
+        if (!allowedOrigins.includes(httpsUrl)) {
+          allowedOrigins.push(httpsUrl);
+        }
+      }
+    });
     
     if (!origin || allowedOrigins.some(allowed => 
       typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
