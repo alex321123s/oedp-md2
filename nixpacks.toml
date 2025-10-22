@@ -1,11 +1,14 @@
+[variables]
+NIXPACKS_PATH = "backend"
+
 [phases.setup]
 nixPkgs = ["nodejs_22", "npm-9_x"]
 
 [phases.install]
-cmds = ["npm install --prefix backend"]
+cmds = ["cd backend && npm ci"]
 
 [phases.build]
-cmds = ["npm run build --prefix backend"]
+cmds = ["cd backend && npm run build"]
 
 [start]
-cmd = "npm start --prefix backend"
+cmd = "cd backend && node dist/server.js"
