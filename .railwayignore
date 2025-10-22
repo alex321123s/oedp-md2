@@ -1,0 +1,10 @@
+frontend/
+docs/
+scripts/
+monitoring/
+nginx/
+database/
+*.md
+*.sh
+*.js
+!backend/
